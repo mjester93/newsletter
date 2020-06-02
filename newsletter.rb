@@ -31,13 +31,14 @@ def calculate_recipients(subscribers, unsubscribed)
   # Using the SUBSCRIBERS and UNSUBSCRIBED arrays,
   # write a method that will return an array of only the subscribers who haven't unsubscribed
   updated_subscribers = Array.new
-
-  if subscribers.any? { 
-    |subscriber| not unsubscribed.include?(subscriber) 
-    updated_subscribers.push(subscriber)
-  }
-
-  puts updated_subscribers
+  if subscribers.each do |subscriber| 
+    if !unsubscribed.include?(subscriber)
+      updated_subscribers.push(subscriber)
+  end
+end
+end
+  
+  return updated_subscribers
 end
 
 def first_n_articles(number_of_articles)
@@ -48,17 +49,26 @@ def print_recipients
   # Write a method that uses the output of calculate_recipients
   # and returns a list of emails separated by commas
   # Ex) "abc@email.com, def@email.com, ghi@email.com"
+  puts calculate_recipients(SUBSCRIBERS, UNSUBSCRIBED).join(", ")
 end
 
 def print_one_article(article)
   # Write a method that will take an article hash
   # and print the title, author and text as a formatted string
   # See the README/sample output for examples
+  puts article[:title]
+  puts "by: " + article[:author]
+  puts article[:text]
 end
 
 def print_many_articles(articles)
   # Write a method that will take in an array of article hashes
   # and format each one using the print_one_article method
+  articles.each do |article|
+    print_one_article(article)
+    print "\n"
+  end
+
 end
 
 def format_campus_location(campus)
@@ -100,4 +110,5 @@ end
 # When we run "ruby newsletter.rb" in the command line,
 # the 'run' method will be called because we're calling it below.
 run
-calculate_recipients(SUBSCRIBERS, UNSUBSCRIBED)
+
+
