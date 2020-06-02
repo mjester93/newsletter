@@ -3,11 +3,11 @@ require 'pry'
 #########################
 # Data for the newsletter
 #########################
-require "pry"
 CAMPUS = {
   "name": "DC",
   "address": "1440 G St NW, Washington, DC 20005",
 }
+
 DATE = "Nov 20, 2019"
 
 SUBSCRIBERS = ["rhona@grimes.info", "cedricschmidt@robel.io", "edmond@ko.org", "bryant@cummingsfisher.biz", "alverta@bernhard.name"]
@@ -30,18 +30,25 @@ ARTICLES = [
 def calculate_recipients(subscribers, unsubscribed)
   # Using the SUBSCRIBERS and UNSUBSCRIBED arrays,
   # write a method that will return an array of only the subscribers who haven't unsubscribed
+
+  # Creating a new array that fits the criteria
   updated_subscribers = Array.new
+
+  # Iterate through the subscribers array
   if subscribers.each do |subscriber| 
+
+    # If subscriber is not in unsubscribed array, push it to the update_subscribers array
     if !unsubscribed.include?(subscriber)
       updated_subscribers.push(subscriber)
+    end
   end
-end
 end
   
   return updated_subscribers
 end
 
 def first_n_articles(number_of_articles)
+  # Change the argument number_of_articles to an integer to satisfy first method requirements
   ARTICLES.first(number_of_articles.to_i)
 end
 
@@ -49,6 +56,9 @@ def print_recipients
   # Write a method that uses the output of calculate_recipients
   # and returns a list of emails separated by commas
   # Ex) "abc@email.com, def@email.com, ghi@email.com"
+
+  # Call calculate_recipients to create an array, and 
+  # then join each element with a comma and a space
   puts calculate_recipients(SUBSCRIBERS, UNSUBSCRIBED).join(", ")
 end
 
@@ -56,6 +66,8 @@ def print_one_article(article)
   # Write a method that will take an article hash
   # and print the title, author and text as a formatted string
   # See the README/sample output for examples
+
+  # Printing hash values on a new line from the provided hash argument
   puts article[:title]
   puts "by: " + article[:author]
   puts article[:text]
@@ -64,27 +76,33 @@ end
 def print_many_articles(articles)
   # Write a method that will take in an array of article hashes
   # and format each one using the print_one_article method
+
+  # Iterate through the provided articles hash and calling the
+  # method print_one_article with aformentioned article in the block
+  # and then adding a line break 
   articles.each do |article|
     print_one_article(article)
     print "\n"
   end
-
 end
 
 def format_campus_location(campus)
-  #binding.pry
+  # Printing out the campus name via the hash symbol
   "Flatiron #{campus[:name]}"
 end
 
 def format_subject
+  # Print out campus and date
   puts "#{format_campus_location(CAMPUS)} Newsletter - #{DATE}\n\n"
 end
 
 def format_footer(campus)
+  # Print out campus name and address
   "Flatiron Newsletter · #{campus[:name]} · #{campus[:address]} "
 end
 
 def print_newsletter(number)
+  # Printing out the whole newsletter
   puts "Generating this week's newsletter...\n\n"
 
   print "SUBJECT: "
